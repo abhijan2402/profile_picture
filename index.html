@@ -18,7 +18,16 @@
 
         }
         function captu(){
-            
+            let video=document.getElementById('video');
+            if(navigator.mediaDevices.getUserMedia){
+                navigator.mediaDevices.getUserMedia({video:true}).then(function (s){
+                    video.srcObject=s;
+                }).catch(function(err){
+                    console.log(err);
+                })
+            }else{
+                console.log("no")
+            }
             const webCamElement=document.getElementById('webcam');
             const canvasElement=document.getElementById('canvas');
             const webcam= new Webcam(webCamElement,"user",canvasElement)
@@ -176,18 +185,7 @@
     <video id="webcam" autoplay playsinline width="800" height="600" ></video>
     <canvas id="canvas"></canvas>
     <a download="" onclick="takePicture()">Snap</a>
-    <script>
-        let video=document.getElementById('video');
-            if(navigator.mediaDevices.getUserMedia){
-                navigator.mediaDevices.getUserMedia({video:true}).then(function (s){
-                    video.srcObject=s;
-                }).catch(function(err){
-                    console.log(err);
-                })
-            }else{
-                console.log("no")
-            }
-    </script>
+
 
 </body>
 </html>
