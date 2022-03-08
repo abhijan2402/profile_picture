@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="https://unpkg.com/webcam-easy/dist/webcam-easy.min.js"></script>
+
+    <script>
+        function hover(){
+            document.getElementById('container').style.transition="3s ease-in";
+            document.getElementById('container').style.display="block";
+
+        }
+        function hoverout(){
+            document.getElementById('container').style.display="none";
+
+        }
+        function captu(){
+            
+            const webCamElement=document.getElementById('webcam');
+            const canvasElement=document.getElementById('canvas');
+            const webcam= new Webcam(webCamElement,"user",canvasElement)
+            webcam.start();
+            
+        }   
+        function takePicture(){
+                let picture=webcam.snap();
+                document.querySelector("a").href=picture;
+            } 
+    </script>
+
+
+
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            background: rgb(255, 255, 255);
+        }
+        .wrapper{
+            /* border: 1px solid rgb(201, 21, 21); */
+            height: 150px;
+            width: 150px;
+            /* position: relative; */
+            border: 5px solid black;
+            border-radius: 50%;
+            background: url(whatsapp.jpg);
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            margin: 100px auto;
+            overflow: hidden;
+      }
+      /* .warpper-1{
+          border: 1px solid red;
+          height: 5cm;
+        
+      } */
+      
+      
+      .container{
+          transition: 3s ease-in-out;
+          display:block;
+          width: 15%;
+          
+          margin: auto;
+          margin-top: -150px;
+          margin-left: 700px;
+          border: none;
+          white-space: nowrap;
+      }
+      .inner-container{
+          position: relative;
+          /* display: block; */
+       
+          margin: auto;
+          width: 100%;
+          overflow: hidden;
+          
+         
+      }
+      .inner-container-1{
+          position: relative;
+          /* display: block; */
+            
+          margin: auto;
+          width: 100%;
+          overflow: hidden;
+          
+        
+          
+         
+      }
+      .btn{
+          /* border: 1px solid black; */
+          width: 100%;
+          font-size: 15px;
+          background-color: white;
+          height: 50px;
+          z-index: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+         
+          
+      }
+      .btn-1{
+          /* border: 1px solid black; */
+          width: 100%;
+          height: 4cm;
+          font-size: 20px;
+          background-color: white;
+          height: 50px;
+          z-index: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+
+         
+          
+      }
+      /* .btn::content{
+          opacity: -1;
+      } */
+      /* .type{
+          background-color: transparent;
+          z-index: -1;
+
+      } */
+      .type{
+          background-color: white;
+          position: absolute;
+          margin-top: -17px;
+          margin-left: -3.7cm;
+          color: transparent;
+          z-index: 0;
+          /* outline: none; */
+          /* white-space: nowrap; */
+          overflow: hidden;
+          /* visibility: hidden; */
+          /* display: none; */
+          
+      }
+      .type:hover{
+          cursor: pointer;
+      }
+      .type::-webkit-file-upload-button{
+          font-size: 10px;
+          overflow: hidden;
+           visibility: hidden; 
+           /* display: none; */
+      }
+      .type::before{
+          content: '';
+      }
+      a{
+            padding: 10px;
+            background-color: orange;
+            color: white;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+    
+    
+    <div class="wrapper" id="wrapper" onmouseenter="hover()" onmouseleave="hoverout()">
+    </div>
+    <div class="container" id="container" onmouseenter="hover()" onmouseleave="hoverout()">
+        <div class="inner-container"><button class="btn" onclick="captu()">Take Photo</button></div>
+        <div class="inner-container-1"><button class="btn">Upload Photo<input class="type" type="file"></button></div>
+    </div>
+    <video id="webcam" autoplay playsinline width="800" height="600" ></video>
+    <canvas id="canvas"></canvas>
+    <a download="" onclick="takePicture()">Snap</a>
+    <script>
+        let video=document.getElementById('video');
+            if(navigator.mediaDevices.getUserMedia){
+                navigator.mediaDevices.getUserMedia({video:true}).then(function (s){
+                    video.srcObject=s;
+                }).catch(function(err){
+                    console.log(err);
+                })
+            }else{
+                console.log("no")
+            }
+    </script>
+
+</body>
+</html>
